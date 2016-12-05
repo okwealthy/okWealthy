@@ -1,0 +1,364 @@
+<!-- Main Header -->
+<header class="main-header">
+
+  <!-- Logo -->
+  <a ui-sref="main" class="logo">
+    <!-- mini logo for sidebar mini 50x50 pixels -->
+    <span class="logo-mini"><b>LOK</b>LOK</span>
+    <!-- logo for regular state and mobile devices -->
+    <span class="logo-lg hidden-xs"><b>OK-Wealthy</b></span>
+    <span class="logo-lg visible-xs"><b>OK-Wealthy</b> {{ 'ui.physicalweb' | translate }}</span>
+  </a>
+
+  <!-- Header Navbar -->
+  <nav class="navbar navbar-static-top" role="navigation">
+    <!-- Sidebar toggle button-->
+    <a href="#" ng-click="$ctrl.UI.sidebar.toggle()" class="sidebar-toggle visible-xs" data-toggle="offcanvas" role="button">
+      <span class="sr-only">Toggle navigation</span>
+    </a>
+  
+
+    <!-- Navbar Right Menu -->
+    <div class="navbar-custom-menu">
+      
+
+      <ul class="nav navbar-nav">
+        
+
+        <!-- Messages: style can be found in dropdown.less-->
+        <li class="dropdown messages-menu">
+          <!-- Menu toggle button -->
+          <a ng-click="$ctrl.Trans.toggle()" class="dropdown-toggle">
+            <i class="fa fa-globe"></i>
+            <span class="label label-info" ng-if="$ctrl.Trans.lang === 'hk'">EN</span>
+            <span class="label label-info" ng-if="$ctrl.Trans.lang === 'en'">中</span>
+          </a>
+        </li>
+
+        <!-- Messages: style can be found in dropdown.less-->
+        <li class="dropdown messages-menu" ng-class="{ 'open': $ctrl.UI.mail.open }">
+          <!-- Menu toggle button -->
+          <a href="#" class="dropdown-toggle" ng-click="$ctrl.UI.mail.toggle()" data-toggle="dropdown">
+            <i class="fa fa-envelope-o"></i>
+            <span class="label label-success">4</span>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li class="header">You have 4 messages</li>
+            <li>
+              <!-- inner menu: contains the messages -->
+              <ul class="menu">
+                <li ng-repeat="mail in [0,1,2,3,4,5,6,7]"><!-- start message -->
+                  <a href="#">
+                    <div class="pull-left">
+                      <!-- User Image -->
+                      <img src="/assets/images/profilepic/user.png" class="img-circle" alt="User Image">
+                    </div>
+                    <!-- Message title and timestamp -->
+                    <h4>
+                      Support Team
+                      <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                    </h4>
+                    <!-- The message -->
+                    <p>Why not buy a new awesome theme?</p>
+                  </a>
+                </li>
+                <!-- end message -->
+                
+
+              </ul>
+              <!-- /.menu -->
+            </li>
+            <li class="footer"><a href="#">See All Messages</a></li>
+          </ul>
+        </li>
+        <!-- /.messages-menu -->
+
+        <!-- Notifications Menu -->
+        <li class="dropdown notifications-menu" ng-class="{ 'open': $ctrl.UI.bell.open }">
+          <!-- Menu toggle button -->
+          <a href="#" class="dropdown-toggle" ng-click="$ctrl.UI.bell.toggle()" data-toggle="dropdown">
+            <i class="fa fa-bell-o"></i>
+            <span class="label label-warning">10</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="header">You have 10 notifications</li>
+            <li>
+              <!-- Inner Menu: contains the notifications -->
+              <ul class="menu">
+                <li><!-- start notification -->
+                  <a href="#">
+                    <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                  </a>
+                </li>
+                <!-- end notification -->
+              </ul>
+            </li>
+            <li class="footer"><a href="#">View all</a></li>
+          </ul>
+        </li>
+        <!-- Tasks Menu -->
+        <li class="dropdown tasks-menu" ng-class="{ 'open': $ctrl.UI.flag.open }">
+          <!-- Menu Toggle Button -->
+          <a href="#" class="dropdown-toggle" ng-click="$ctrl.UI.flag.toggle()" data-toggle="dropdown">
+            <i class="fa fa-flag-o"></i>
+            <span class="label label-danger">9</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="header">You have 9 tasks</li>
+            <li>
+              <!-- Inner menu: contains the tasks -->
+              <ul class="menu">
+                <li><!-- Task item -->
+                  <a href="#">
+                    <!-- Task title and progress text -->
+                    <h3>
+                      Design some buttons
+                      <small class="pull-right">20%</small>
+                    </h3>
+                    <!-- The progress bar -->
+                    <div class="progress xs">
+                      <!-- Change the css width attribute to simulate progress -->
+                      <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                        <span class="sr-only">20% Complete</span>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <!-- end task item -->
+              </ul>
+            </li>
+            <li class="footer">
+              <a href="#">View all tasks</a>
+            </li>
+          </ul>
+        </li>
+        <!-- User Account Menu -->
+        <li class="dropdown user user-menu" ng-class="{ 'open': $ctrl.UI.profile.open }">
+          <!-- Menu Toggle Button -->
+          <a href="#" class="dropdown-toggle" ng-click="$ctrl.UI.profile.toggle()" data-toggle="dropdown">
+            <!-- The user image in the navbar-->
+            <img src="/assets/images/profilepic/user.png" class="user-image" alt="User Image">
+            <!-- hidden-xs hides the username on small devices so only the image appears. -->
+            <span class="hidden-xs">{{ 'ui.defaultuser' | translate }}</span>
+          </a>
+          <ul class="dropdown-menu">
+            <!-- The user image in the menu -->
+            <li class="user-header">
+              <img src="/assets/images/profilepic/user.png" class="img-circle" alt="User Image">
+
+              <p>
+                {{ 'ui.defaultuser' | translate }}
+                <br>Web Developer
+                <small>Member since Nov. 2012</small>
+              </p>
+            </li>
+            <!-- Menu Body -->
+            <li class="user-body">
+              <div class="row">
+                <div class="col-xs-4 text-center">
+                  <a href="#">Followers</a>
+                </div>
+                <div class="col-xs-4 text-center">
+                  <a href="#">Sales</a>
+                </div>
+                <div class="col-xs-4 text-center">
+                  <a href="#">Friends</a>
+                </div>
+              </div>
+              <!-- /.row -->
+            </li>
+            <!-- Menu Footer-->
+            <li class="user-footer">
+              <div class="pull-left">
+                <a href="#" class="btn btn-default btn-flat">Profile</a>
+              </div>
+              <div class="pull-right">
+                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <!-- Control Sidebar Toggle Button -->
+        <li>
+          <a href="#" ng-click="$ctrl.UI.rightbar.toggle()" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<!-- Left side column. contains the logo and sidebar -->
+
+<aside class="main-sidebar">
+
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+    
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel" ng-if="false">
+      
+      <div class="pull-left image">
+        <img src="/assets/images/profilepic/user.png" class="img-circle" alt="User Image">
+      </div>
+      <div class="pull-left info">
+        <p>{{ 'ui.defaultuser' | translate }}</p>
+        <!-- Status -->
+        <a href="#"><i class="fa fa-circle blingbling d-text-success"></i> {{ 'ui.online' | translate }}</a>
+      </div>
+
+    </div>
+    
+
+    <ul class="sidebar-menu" ng-if="!false">
+      <li class="header">Login</li>
+    </ul>
+
+    
+    <!-- login form (Optional) -->
+    <form class="sidebar-form" ng-if="!false">
+      <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Email">
+        <span class="input-group-btn">
+          <button type="submit" name="search" class="btn btn-flat"><i class="fa fa-envelope-o"></i></button>
+        </span>
+      </div>
+      <div class="input-group" style="margin-top: 3px;">
+        <input type="password" name="q" class="form-control" placeholder="Password">
+        <span class="input-group-btn">
+          <button type="submit" name="search" class="btn btn-flat"><i class="fa fa-key"></i></button>
+        </span>
+      </div>
+    </form>
+    <!-- /.search form -->
+    
+    <ul class="sidebar-menu" ng-if="!false">
+      <li class="header">Search</li>
+    </ul>
+
+    <!-- search form (Optional) -->
+    <form class="sidebar-form">
+      <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Search...">
+        <span class="input-group-btn">
+          <button type="submit" name="search" class="btn btn-flat"><i class="fa fa-search"></i></button>
+        </span>
+      </div>
+    </form>
+    <!-- /.search form -->
+
+
+
+    <!-- Sidebar Menu -->
+    <ul class="sidebar-menu">
+      <li class="header">Menu</li>
+      <!-- Optionally, you can add icons to the links -->
+      <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
+      
+      <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+      
+      <li class="treeview" ng-init="$ctrl.mailboxOpen = true;" ng-class="{ 'active': $ctrl.mailboxOpen }">
+        <a href="mailbox.html"  ng-click="$ctrl.mailboxOpen = !$ctrl.mailboxOpen;">
+          <i class="fa fa-envelope"></i> <span>Mailbox</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li>
+            <a href="mailbox.html">Inbox
+              <span class="pull-right-container">
+                <span class="label label-primary pull-right">13</span>
+              </span>
+            </a>
+          </li>
+          <li class="active"><a href="compose.html">Compose</a></li>
+          <li><a href="read-mail.html">Read</a></li>
+          
+          
+
+
+          <!-- level 2 -->
+          <li class="treeview" ng-init="$ctrl.mailboxOpen2 = true;" ng-class="{ 'active': $ctrl.mailboxOpen2 }">
+            
+
+            <a href="mailbox.html"  ng-click="$ctrl.mailboxOpen2 = !$ctrl.mailboxOpen2;">
+              <i class="fa fa-envelope"></i> 
+              <span>
+                Mailbox
+              </span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            
+
+            <ul class="treeview-menu">
+              <li>
+                <a href="mailbox.html">
+                  <i class="fa fa-envelope"></i> 
+                  Inbox
+                  <span class="pull-right-container">
+                    <span class="label label-primary pull-right">13</span>
+                  </span>
+                </a>
+              </li>
+              <li class="active">
+                <a href="compose.html">
+                  <i class="fa fa-envelope"></i> 
+                  Compose
+                </a>
+              </li>
+              <li>
+                <a href="read-mail.html">
+                  Read
+                </a>
+              </li>
+
+            </ul>
+
+          </li>
+          <!-- Level 2 -->
+
+        </ul>
+        <!-- Level 1 -->
+        
+
+      </li>
+
+      
+    </ul>
+    <!-- /.sidebar-menu -->
+  </section>
+  <!-- /.sidebar -->
+</aside>
+
+
+<!-- <div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" ng-click="$ctrl.isCollapsed = !$ctrl.isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">OK-Wealthy</a>
+    </div>
+    <div uib-collapse="$ctrl.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav">
+        <li ng-repeat="item in $ctrl.menu" ui-sref-active="active">
+            <a ui-sref="{{item.state}}">{{item.title}}</a>
+        </li>
+        <li ng-show="$ctrl.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="signup">Sign up</a></li>
+        <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="login">Login</a></li>
+        <li ng-show="$ctrl.isLoggedIn()"><p class="navbar-text">Hello {{ $ctrl.getCurrentUser().name }}</p> </li>
+        <li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+        <li ng-show="$ctrl.isLoggedIn()"><a ui-sref="logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
