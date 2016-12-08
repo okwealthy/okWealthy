@@ -4,6 +4,8 @@ import User from './user.model';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
 
+import mongoose, {Schema} from 'mongoose';
+
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
   return function(err) {
@@ -25,10 +27,42 @@ function handleError(res, statusCode) {
 export function index(req, res) {
   return User.find({}, '-salt -password').exec()
     .then(users => {
-      res.status(200).json(users);
+      return res.status(200).json(users);
     })
     .catch(handleError(res));
 }
+
+/**
+ * Creates a new user
+ */
+export function createForManager(req, res) {
+  var newUser = new User(req.body);
+  newUser._business = req.user._business;
+  newUser.provider = 'local';
+  newUser.role = 'staff';
+  newUser.save()
+    .then(function(user) {
+      res.json({ status: 'ok' });
+    })
+    .catch(validationError(res));
+}
+
+
+/**
+ * Creates a new user
+ */
+export function createForAdmin(req, res) {
+  var newUser = new User(req.body);
+  newUser.provider = 'local';
+  newUser.role = 'user';
+  newUser.save()
+    .then(function(user) {
+      res.json({ status: 'ok' });
+    })
+    .catch(validationError(res));
+}
+
+
 
 /**
  * Creates a new user
@@ -47,6 +81,29 @@ export function create(req, res) {
     .catch(validationError(res));
 }
 
+
+
+/**
+ * Get staff
+ */
+export function myStaff(req, res, next) {
+  var bID = req.params.bID || '';
+
+  return User.find({
+    _business: bID
+  })
+  .select('-salt -password')
+    .exec()
+    .then(user => {
+      if(!user) {
+        return res.status(404).end();
+      }
+
+      return res.json(user);
+    })
+    .catch(err => next(err));
+}
+
 /**
  * Get a single user
  */
@@ -63,6 +120,68 @@ export function show(req, res, next) {
     .catch(err => next(err));
 }
 
+
+
+export function changeRole(req, res){
+
+  var userId = req.body._id;
+  var isAdmin = req.user.role === 'admin';
+  var isManager = req.user.role === 'manager';
+
+  return User.findById(userId).exec()
+    .then(user => {
+      if(!user) {
+        return res.status(404).end();
+      }
+
+      if (!isAdmin){
+        if (req.body.role.toLowerCase() === 'admin' || req.body.role.toLowerCase() === 'system'){
+          return res.status(401).end();
+        }
+
+        if (req.body.role.toLowerCase() === 'boss' && isManager){
+          return res.status(401).end();
+        }
+      }
+
+      user.role = req.body.role;
+      return user.save()
+        .then(function(){
+
+          return res.json(user.profile);
+        });
+    })
+    .catch(err => next(err));
+  
+}
+
+
+
+
+export function updateInfo(req, res){
+
+  var userId = req.body._id;
+
+  return User.findById(userId).exec()
+    .then(user => {
+      if(!user) {
+        return res.status(404).end();
+      }
+
+      user.active = req.body.active;
+      user.name = req.body.name;
+      user.email = req.body.email;
+      return user.save()
+        .then(function(){
+
+          return res.json(user.profile);
+        });
+    })
+    .catch(err => next(err));
+  
+}
+
+
 /**
  * Deletes a user
  * restriction: 'admin'
@@ -73,6 +192,26 @@ export function destroy(req, res) {
       res.status(204).end();
     })
     .catch(handleError(res));
+}
+
+/**
+ * Change a users password
+ */
+export function forceResetPassword(req, res) {
+  var userId =  String(req.body._id);
+  var newPass = String(req.body.newPassword);
+
+  return User.findById(userId).exec()
+    .then(user => {
+
+      user.password = newPass;
+      return user.save()
+        .then(() => {
+          return res.status(204).end();
+        })
+        .catch(validationError(res));
+    
+    });
 }
 
 /**

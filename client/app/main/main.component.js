@@ -2,14 +2,20 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import routing from './main.routes';
 
+import NProgress from 'nprogress';
+
+
 export class MainController {
   
 
   constructor(UI) {
     'ngInject';
 
+    // NProgress.start();
     this.UI = UI;
     // this.Trans = Trans;
+
+
 
   }
 
@@ -50,6 +56,27 @@ export class MainController {
 }
 
 export default angular.module('owApp.main', [uiRouter])
+  
+  .directive('sidebarOpen', function(UI){
+    'ngInject';
+
+    return {
+      restrict: 'A',
+      link: function(scope, element, attrs){
+
+        UI.sidebar.hook = function(){
+          if (UI.sidebar.open){
+            element.addClass('sidebar-open');
+          }else{
+            element.removeClass('sidebar-open');
+          } 
+        };
+      
+      }
+    };
+
+  })
+
   .service('UI', function(){
       
     var menu = ['flag', 'bell', 'mail', 'profile', 'rightbar'];
@@ -57,15 +84,18 @@ export default angular.module('owApp.main', [uiRouter])
     this.sidebar = {};
     this.sidebar.open = false;
     this.sidebar.toggle = function(){
+
       this.sidebar.open = !this.sidebar.open;
 
       menu.forEach(function(item){
         this[item].open = false;
       }.bind(this));
   
+      if (this.sidebar.hook){
+        this.sidebar.hook();
+      }
 
     }.bind(this);
-
     
     function maker(key){
       this[key] = {};
@@ -87,7 +117,6 @@ export default angular.module('owApp.main', [uiRouter])
       maker.bind(this)(menuItem);
     }.bind(this));
 
-  
 
     this.bartab1 = {};
     this.bartab1.open = true;

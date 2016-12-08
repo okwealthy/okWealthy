@@ -4,6 +4,10 @@ import jwt from 'jsonwebtoken';
 import expressJwt from 'express-jwt';
 import compose from 'composable-middleware';
 import User from '../api/user/user.model';
+import Business from '../api/business/business.model';
+
+var Promise = require('bluebird');
+
 
 var validateJwt = expressJwt({
   secret: config.secrets.session
@@ -36,6 +40,8 @@ export function isAuthenticated() {
           }
           req.user = user;
           next();
+
+          return null;
         })
         .catch(err => next(err));
     });
@@ -57,6 +63,56 @@ export function hasRole(roleRequired) {
       } else {
         return res.status(403).send('Forbidden');
       }
+    });
+
+}
+
+
+
+export function hasBusinessRight(Collection, roleRequired){
+  return isAuthenticated()
+    .use(hasRole(roleRequired))
+    .use(function(req, res, next){
+      return Collection.find({
+        _business: req.user._business,
+        _id: req.params.id || req.body._id
+      }).exec()
+      .then(function (item){
+
+        if(!item) {
+          return res.status(401).end();
+        }
+
+        next();
+        return null;
+      })
+      .catch(err => next(err))
+
+      ;
+      
+    
+    });
+}
+
+
+export function belongsToMe(Collection){
+  return isAuthenticated()
+    .use(function(req, res, next){
+      return Collection.find({
+        _id: req.params.id,
+        _user: req.user._id
+      })
+      .exec()
+      .then(function(item){
+
+        if(!item) {
+          return res.status(401).end();
+        }
+
+        next();
+        return null;
+      })
+      .catch(err => next(err));
     });
 }
 

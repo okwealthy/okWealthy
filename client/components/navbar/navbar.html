@@ -10,24 +10,59 @@
     <span class="logo-lg visible-xs"><b>OK-Wealthy</b> {{ 'ui.physicalweb' | translate }}</span>
   </a>
 
+  
   <!-- Header Navbar -->
   <nav class="navbar navbar-static-top" role="navigation">
     <!-- Sidebar toggle button-->
-    <a href="#" ng-click="$ctrl.UI.sidebar.toggle()" class="sidebar-toggle visible-xs" data-toggle="offcanvas" role="button">
+    <a ng-click="$ctrl.UI.sidebar.toggle()" class="sidebar-toggle visible-xs" data-toggle="offcanvas" role="button">
       <span class="sr-only">Toggle navigation</span>
     </a>
-  
+    
+    <div class="navbar-brand hidden-xs">
+       {{ 'ui.physicalweb' | translate }}
+    </div>
 
     <!-- Navbar Right Menu -->
-    <div class="navbar-custom-menu">
+    <div class="navbar-custom-menu" ng-if="!$ctrl.isLoggedIn()">
+      <ul class="nav navbar-nav">
+
+        <!-- Login out -->
+        <li>
+          <a ui-sref="login"> <i class="fa fa-sign-in"></i> {{ 'ui.login' | translate }}</a>
+        </li>
+        <li>
+          <a ui-sref="signup"> <i class="fa fa-user-plus"></i> {{ 'ui.signup' | translate }}</a>
+        </li>
+
+        <!-- Language -->
+        <li class="">
+          <!--  toggle button -->
+          <a ng-click="$ctrl.Trans.toggle()">
+            
+            <span ng-if="$ctrl.Trans.lang === 'hk'">Use English</span>
+            <span ng-if="$ctrl.Trans.lang === 'en'">轉中文</span>
+            
+            <i class="fa fa-globe"></i>
+            <span class="label label-info" ng-if="$ctrl.Trans.lang === 'hk'">EN</span>
+            <span class="label label-info" ng-if="$ctrl.Trans.lang === 'en'">中</span>
+            
+          </a>
+        </li>
+
+      </ul>
+    </div>
+    <!-- Navbar Right Menu -->
+    
+
+    <!-- Navbar Right Menu -->
+    <div class="navbar-custom-menu" ng-if="$ctrl.isLoggedIn()">
       
 
       <ul class="nav navbar-nav">
         
-
-        <!-- Messages: style can be found in dropdown.less-->
+        <!-- Language-->
         <li class="dropdown messages-menu">
-          <!-- Menu toggle button -->
+          <!--  toggle button -->
           <a ng-click="$ctrl.Trans.toggle()" class="dropdown-toggle">
             <i class="fa fa-globe"></i>
             <span class="label label-info" ng-if="$ctrl.Trans.lang === 'hk'">EN</span>
@@ -133,6 +168,7 @@
             </li>
           </ul>
         </li>
+
         <!-- User Account Menu -->
         <li class="dropdown user user-menu" ng-class="{ 'open': $ctrl.UI.profile.open }">
           <!-- Menu Toggle Button -->
@@ -140,15 +176,15 @@
             <!-- The user image in the navbar-->
             <img src="/assets/images/profilepic/user.png" class="user-image" alt="User Image">
             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-            <span class="hidden-xs">{{ 'ui.defaultuser' | translate }}</span>
+            <span class="hidden-xs">{{ $ctrl.getCurrentUser().name }}</span>
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu" style="padding: 0px;">
             <!-- The user image in the menu -->
             <li class="user-header">
               <img src="/assets/images/profilepic/user.png" class="img-circle" alt="User Image">
 
               <p>
-                {{ 'ui.defaultuser' | translate }}
+                {{ $ctrl.getCurrentUser().name }}
                 <br>Web Developer
                 <small>Member since Nov. 2012</small>
               </p>
@@ -174,18 +210,27 @@
                 <a href="#" class="btn btn-default btn-flat">Profile</a>
               </div>
               <div class="pull-right">
-                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                <a ui-sref="logout" class="btn btn-default btn-flat">Sign out</a>
               </div>
             </li>
           </ul>
         </li>
+        
+
         <!-- Control Sidebar Toggle Button -->
         <li>
           <a href="#" ng-click="$ctrl.UI.rightbar.toggle()" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
         </li>
       </ul>
     </div>
+
+
+    
+
   </nav>
+
+
+
 </header>
 <!-- Left side column. contains the logo and sidebar -->
 
@@ -195,50 +240,65 @@
   <section class="sidebar">
     
     <!-- Sidebar user panel (optional) -->
-    <div class="user-panel" ng-if="false">
+    <div class="user-panel" ng-if="$ctrl.isLoggedIn()">
       
       <div class="pull-left image">
         <img src="/assets/images/profilepic/user.png" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
-        <p>{{ 'ui.defaultuser' | translate }}</p>
+        <p>{{ $ctrl.getCurrentUser().name }}</p>
         <!-- Status -->
         <a href="#"><i class="fa fa-circle blingbling d-text-success"></i> {{ 'ui.online' | translate }}</a>
       </div>
 
     </div>
-    
 
-    <ul class="sidebar-menu" ng-if="!false">
-      <li class="header">Login</li>
+    <ul class="sidebar-menu" ng-if="!$ctrl.isLoggedIn()">
+      <li class="header">{{ 'ui.fastlogin' | translate }}</li>
     </ul>
 
-    
     <!-- login form (Optional) -->
-    <form class="sidebar-form" ng-if="!false">
-      <div class="input-group">
-        <input type="text" name="q" class="form-control" placeholder="Email">
-        <span class="input-group-btn">
-          <button type="submit" name="search" class="btn btn-flat"><i class="fa fa-envelope-o"></i></button>
-        </span>
+    <form class="" name="form" ng-submit="$ctrl.login(form)" ng-if="!$ctrl.isLoggedIn()">
+      <div class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="email" class="form-control"  placeholder="Email" ng-model="$ctrl.user.email" required>
+          <span class="input-group-btn">
+            <button type="submit" name="search" class="btn btn-flat"><i class="fa fa-envelope-o"></i></button>
+          </span>
+        </div>
       </div>
-      <div class="input-group" style="margin-top: 3px;">
-        <input type="password" name="q" class="form-control" placeholder="Password">
-        <span class="input-group-btn">
-          <button type="submit" name="search" class="btn btn-flat"><i class="fa fa-key"></i></button>
-        </span>
+      <div class="sidebar-form">
+        <div class="input-group">
+          <input type="password" name="password" class="form-control" placeholder="Password" ng-model="$ctrl.user.password" required>
+          <span class="input-group-btn">
+            <button type="submit" name="search" class="btn btn-flat"><i class="fa fa-key"></i></button>
+          </span>
+        </div>
       </div>
+      
+      <div class="form-group has-error">
+        <p class="help-block" ng-show="form.email.$error.required && form.password.$error.required && $ctrl.submitted">
+           Please enter your email and password.
+        </p>
+        <p class="help-block" ng-show="form.email.$error.email && $ctrl.submitted">
+           Please enter a valid email.
+        </p>
+
+        <p class="help-block">{{ $ctrl.errors.login }}</p>
+      </div>
+
     </form>
     <!-- /.search form -->
-    
-    <ul class="sidebar-menu" ng-if="!false">
-      <li class="header">Search</li>
+
+    <ul class="sidebar-menu" ng-if="!$ctrl.isLoggedIn()">
+      <li class="header">{{ 'ui.search' | translate }}</li>
     </ul>
+
 
     <!-- search form (Optional) -->
     <form class="sidebar-form">
       <div class="input-group">
-        <input type="text" name="q" class="form-control" placeholder="Search...">
+        <input type="text" name="q" class="form-control" placeholder="{{ 'ui.search' | translate }}...">
         <span class="input-group-btn">
           <button type="submit" name="search" class="btn btn-flat"><i class="fa fa-search"></i></button>
         </span>
@@ -247,18 +307,80 @@
     <!-- /.search form -->
 
 
-
     <!-- Sidebar Menu -->
     <ul class="sidebar-menu">
-      <li class="header">Menu</li>
+      <li class="header" ng-if="$ctrl.isStaff">{{ 'ui.managing' | translate }} {{ 'ui.menu' | translate }}</li>
       <!-- Optionally, you can add icons to the links -->
-      <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
       
+<!--       <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
       <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+ -->
       
-      <li class="treeview" ng-init="$ctrl.mailboxOpen = true;" ng-class="{ 'active': $ctrl.mailboxOpen }">
-        <a href="mailbox.html"  ng-click="$ctrl.mailboxOpen = !$ctrl.mailboxOpen;">
-          <i class="fa fa-envelope"></i> <span>Mailbox</span>
+      <li ng-if="$ctrl.isAdmin" class="treeview" ng-init="$ctrl.adminOpen = true;" ng-class="{ 'active': $ctrl.adminOpen }">
+        <a ng-click="$ctrl.adminOpen = !$ctrl.adminOpen;">
+          <i class="fa fa-user-o"></i> <span>{{ 'ui.sysadmin' | translate }}</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          
+          <li ui-sref-active="active">
+            <a ui-sref="user"><i class="fa fa-usd"></i> {{ 'ui.manageuser' | translate }}</a>
+          </li>
+          
+        </ul>
+        <!-- Level 1 -->
+
+      </li>
+
+      <li ng-if="$ctrl.isBoss" class="treeview" ng-init="$ctrl.bossOpen = true;" ng-class="{ 'active': $ctrl.bossOpen }">
+        <a ng-click="$ctrl.bossOpen = !$ctrl.bossOpen;">
+          <i class="fa fa-user-o"></i> <span>{{ 'ui.boss' | translate }}</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          
+          <li ui-sref-active="active">
+            <a ui-sref="business"><i class="fa fa-usd"></i> {{ 'ui.business' | translate }} {{ 'ui.info' | translate }}</a>
+          </li>
+          
+        </ul>
+        <!-- Level 1 -->
+
+      </li>
+
+      <li ng-if="$ctrl.isManager" class="treeview" ng-init="$ctrl.managerOpen = true;" ng-class="{ 'active': $ctrl.managerOpen }">
+        <a ng-click="$ctrl.managerOpen = !$ctrl.managerOpen;">
+          <i class="fa fa-user-o"></i> <span>{{ 'ui.manager' | translate }}</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          
+          <li ui-sref-active="active">
+            <a ui-sref="staff"><i class="fa fa-user-o"></i> {{ 'ui.staff' | translate }}</a>
+          </li>
+
+          <li ui-sref-active="active">
+            <a ui-sref="category"><i class="fa fa-sitemap"></i> {{ 'ui.product' | translate }} {{ 'ui.category' | translate }}</a>
+          </li>
+
+        </ul>
+        <!-- Level 1 -->
+
+      </li>
+
+
+
+
+
+      <li ng-if="false" class="treeview" ng-init="$ctrl.templateOpen = true;" ng-class="{ 'active': $ctrl.templateOpen }">
+        <a ng-click="$ctrl.templateOpen = !$ctrl.templateOpen;">
+          <i class="fa fa-envelope"></i> <span>{{ 'ui.manager' | translate }}</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
@@ -274,8 +396,6 @@
           <li class="active"><a href="compose.html">Compose</a></li>
           <li><a href="read-mail.html">Read</a></li>
           
-          
-
 
           <!-- level 2 -->
           <li class="treeview" ng-init="$ctrl.mailboxOpen2 = true;" ng-class="{ 'active': $ctrl.mailboxOpen2 }">

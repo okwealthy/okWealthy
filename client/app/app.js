@@ -13,6 +13,8 @@ import uiBootstrap from 'angular-ui-bootstrap';
 // import ngValidationMatch from 'angular-validation-match';
 
 
+import uiGrid from 'angular-ui-grid';
+
 import {
   routeConfig
 } from './app.config';
@@ -23,6 +25,21 @@ import admin from './admin';
 import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
 import main from './main/main.component';
+
+
+
+import user from './admin/user/user.component';
+
+import business from './boss/business/business.component';
+
+import staff from './manager/staff/staff.component';
+import category from './manager/category/category.component';
+
+
+import transport from './service/transport.service';
+
+
+
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
@@ -33,6 +50,19 @@ import './app.scss';
 
 angular.module('owApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
     
+    'ui.grid',
+    'ui.grid.edit',
+    'ui.grid.rowEdit', 
+    'ui.grid.cellNav',
+
+    transport,
+
+    business,
+    staff,
+    user,
+    category,
+
+
     translate,  
 
     uiBootstrap, _Auth, account, admin, navbar, footer, main, constants, socket, util

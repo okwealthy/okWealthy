@@ -6,9 +6,15 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 
 // @import '~admin-lte/dist/css/AdminLTE.css';
 
+// @import '~ui-select/dist/select.css';
+
+@import '~angular-ui-grid/ui-grid.css';
+
 @import './app.panel';
 @import './app.panel.skin-blue';
 
+
+@import './app.nprogress';
 
 
 // @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,900|Roboto:300,500,700,900);
@@ -51,13 +57,43 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 // Component styles are injected through gulp
 /* inject:scss */
 @import 'admin/admin';
+@import 'admin/user/user';
+@import 'app.nprogress';
 @import 'app.panel';
 @import 'app.panel.skin-blue';
+@import 'boss/business/business';
 @import 'main/main';
+@import 'manager/category/category';
+@import 'manager/staff/staff';
 @import '../components/footer/footer';
 @import '../components/modal/modal';
 @import '../components/oauth-buttons/oauth-buttons';
 /* endinject */
 
+
+
+
+
+
+
+// #nprogress{
+//   position: absolute;
+//   z-index: 10000;
+//   top: 0px;
+//   left: 0px;
+// }
+
+// #nprogress .bar{
+//   background: #f00 !important; 
+// }
+
+// #nprogress .spinner-icon{
+//     border-top-color: #d22 !important;
+//     border-left-color: #d22 !important;
+// }
+
+// #nprogress .peg{
+//     box-shadow: 0 0 10px #d22, 0 0 5px #d22 !important;
+// }
 
 

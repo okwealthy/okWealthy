@@ -7,6 +7,14 @@ import mongoose, {Schema} from 'mongoose';
 const authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 var UserSchema = new Schema({
+
+  _business: { type: Schema.Types.ObjectId, ref: 'Business' },
+
+  active: {
+    type: Boolean,
+    default: true,
+  },
+
   name: String,
   email: {
     type: String,
@@ -164,7 +172,7 @@ UserSchema.methods = {
    */
   authenticate(password, callback) {
     if(!callback) {
-      return this.password === this.encryptPassword(password);
+      return this.password === this.encryptPassword(password) && this.active === true;
     }
 
     this.encryptPassword(password, (err, pwdGen) => {
@@ -172,7 +180,7 @@ UserSchema.methods = {
         return callback(err);
       }
 
-      if(this.password === pwdGen) {
+      if(this.password === pwdGen && this.active === true) {
         return callback(null, true);
       } else {
         return callback(null, false);

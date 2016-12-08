@@ -1,0 +1,178 @@
+<div class="ng-cloak fake-body d-hold-transition hold-header-transition skin-blue sidebar-mini fixed" sidebar-open d-ng-class="{ 'sidebar-open': $ctrl.UI.sidebar.open }" >
+  <div class="wrapper">
+
+    <navbar></navbar>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          {{ 'ui.user' | translate }}
+          <small>{{ 'ui.welcometo' | translate }} OK-Wealthy</small>
+        </h1>
+        <ol class="breadcrumb">
+          <li><i class="fa fa-cog fa-spin"></i> {{ 'ui.platform' | translate }}</li>
+          <li class="">{{ 'ui.sysadmin' | translate }}</li>
+          <li class="active">{{ 'ui.user' | translate }}</li>
+        </ol>
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+		
+		<div class="row">
+			<div class="col-lg-6">
+
+				  <div class="nav-tabs-custom" ng-init="vm.tabID = '1'">
+		            <ul class="nav nav-tabs">
+		              <li ng-class="{ 'active': vm.tabID === '1' }"><a ng-click="vm.tabID = '1'">{{ 'ui.create' | translate }} {{ 'ui.user' | translate }}</a></li>
+		              <!-- <li ng-class="{ 'active': vm.tabID === '2' }"><a ng-click="vm.tabID = '2'">{{ 'ui.manageuser' | translate }} </a></li> -->
+		              <!-- <li ng-class="{ 'active': vm.tabID === '3' }"><a ng-click="vm.tabID = '3'"></a></li> -->
+		              <!-- <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li> -->
+		            </ul>
+		            <div class="tab-content">
+		              <div class="tab-pane" ng-class="{ 'active': vm.tabID === '1' }">
+
+
+		                  <form novalidate name="form" ng-submit="vm.register(form);">
+					        <div class="form-group has-feedback" ng-class="{ 'has-success': form.name.$valid && vm.submitted,
+					                                            'has-error': form.name.$invalid && vm.submitted }">
+					          <input type="text" name="name" class="form-control" placeholder="{{ 'ui.fullname' | translate }}" ng-model="vm.user.name"
+					                 required>
+					          <span class="glyphicon glyphicon-user form-control-feedback"></span>
+					          
+					          <p class="help-block" ng-show="form.name.$error.required && vm.submitted">
+					            A name is required
+					          </p>
+
+					        </div>
+					        <div class="form-group has-feedback" ng-class="{ 'has-success': form.email.$valid && vm.submitted,
+					                                            'has-error': form.email.$invalid && vm.submitted }">
+					          <input type="email" class="form-control" placeholder="{{ 'ui.email' | translate }}" name="email" ng-model="vm.user.email"
+					                 required
+					                 mongoose-error>
+					          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+
+					          <p class="help-block" ng-show="form.email.$error.email && vm.submitted">
+					            Doesn't look like a valid email.
+					          </p>
+					          <p class="help-block" ng-show="form.email.$error.required && vm.submitted">
+					            What's your email address?
+					          </p>
+					          <p class="help-block" ng-show="form.email.$error.mongoose">
+					            {{ vm.errors.email }}
+					          </p>
+					        </div>
+					        <div class="form-group has-feedback" ng-class="{ 'has-success': form.password.$valid && vm.submitted,
+					                                            'has-error': form.password.$invalid && vm.submitted }">
+					          <input type="password" class="form-control" placeholder="{{ 'ui.password' | translate }}" name="password" ng-model="vm.user.password"
+					                 ng-minlength="3"
+					                 required
+					                 mongoose-error>
+					          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+					          <p class="help-block"
+					             ng-show="(form.password.$error.minlength || form.password.$error.required) && vm.submitted">
+					            Password must be at least 3 characters.
+					          </p>
+					          <p class="help-block" ng-show="form.password.$error.mongoose">
+					            {{ vm.errors.password }}
+					          </p>
+					        </div>
+					        <!-- <div class="form-group has-feedback"  ng-class="{ 'has-success': form.confirmPassword.$valid && vm.submitted,
+					                                            'has-error': form.confirmPassword.$invalid && vm.submitted }">
+					          <input type="password" class="form-control" name="confirmPassword" placeholder="{{ 'ui.retypepassword' | translate }}" name="confirmPassword" ng-model="vm.user.confirmPassword"
+					                 ng-match="vm.user.password"
+					                 ng-minlength="3" required>
+					          <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+					          
+					          <p class="help-block"
+					             ng-show="form.confirmPassword.$error.match && vm.submitted">
+					            Passwords must match.
+					          </p>
+					        </div> -->
+					        <div class="row">
+					          <div class="col-xs-8">
+					            <!-- <div class="checkbox">
+					              <input type="checkbox" required style="margin-left: 0px;"> 
+					              <label>
+					                {{ 'ui.iagreeto' | translate }} <a ui-sref="terms">{{ 'ui.terms' | translate }}</a>
+					              </label>
+					            </div> -->
+					          </div>
+					          <!-- /.col -->
+					          <div class="col-xs-4">
+					            <button type="submit" class="btn btn-primary btn-block btn-flat">{{ 'ui.signup' | translate }}</button>
+					          </div>
+					          <!-- /.col -->
+					        </div>
+					      </form>
+
+
+		              </div>
+		              <!-- /.tab-pane -->
+		              <div class="tab-pane" ng-class="{ 'active': vm.tabID === '2' }">
+		                
+
+		              </div>
+		              <!-- /.tab-pane -->
+		              <div class="tab-pane" ng-class="{ 'active': vm.tabID === '3' }">
+		                
+
+		              </div>
+		              <!-- /.tab-pane -->
+		            </div>
+		            <!-- /.tab-content -->
+		          </div>			
+
+			</div>
+			<!-- lg6 -->
+
+			<div class="col-lg-6">
+				
+				<div class="box box-info">
+					<div class="box-header with-border">
+						<i class="fa fa-user-o"></i>
+
+						<h3 class="box-title">{{ 'ui.manageuser' | translate }}</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						
+						<div class="table-responsive">
+	                      <div ui-grid="vm.userGrid" ui-grid-edit ui-grid-row-edit ui-grid-cellNav class="catalog-grid"></div>
+	                    </div>
+
+					</div>
+					<!-- /.box-body -->
+				</div>
+				<!-- box -->
+				
+			</div>
+			<!-- lg6 -->
+		</div>
+		<!-- row -->
+
+		<!-- <pre>{{ vm.users | json }}</pre> -->
+
+
+		<!-- {{ { hk: 'hk', en: 'en' } | to:$ctrl }} -->
+        <!-- Your Page Content Here -->
+        <!-- <div class="fake-tall"></div> -->
+
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer></footer>
+    
+
+
+  </div>
+  <!-- ./wrapper -->
+
+
+</div>
+<!-- fakebody -->

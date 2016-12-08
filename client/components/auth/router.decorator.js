@@ -1,10 +1,27 @@
 'use strict';
 
+import NProgress from 'nprogress';
+
 export function routerDecorator($rootScope, $state, Auth) {
   'ngInject';
   // Redirect to login if route requires auth and the user is not logged in, or doesn't have required role
 
+  // $rootScope.$on('$stateChangeSuccess', function(event, next) {
+  //   setTimeout(function(){
+  //     NProgress.done();
+  //   },350);
+  // });
+
+  // $rootScope.$on('$stateChangeError', function(event, next) {
+  //   setTimeout(function(){
+  //     NProgress.done();
+  //   },350);
+  // });
+
+
   $rootScope.$on('$stateChangeStart', function(event, next) {
+    // NProgress.start();
+
     if(!next.authenticate) {
       return;
     }

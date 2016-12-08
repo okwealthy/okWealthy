@@ -1,0 +1,247 @@
+<div class="ng-cloak fake-body d-hold-transition hold-header-transition skin-blue sidebar-mini fixed" sidebar-open d-ng-class="{ 'sidebar-open': $ctrl.UI.sidebar.open }" >
+  <div class="wrapper">
+
+    <navbar></navbar>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          {{ 'ui.staff' | translate }}
+          <small>{{ 'ui.managestaff' | translate }}</small>
+        </h1>
+        <ol class="breadcrumb">
+          <li><i class="fa fa-cog fa-spin"></i> {{ 'ui.platform' | translate }}</li>
+          <li>{{ 'ui.manager' | translate }}</li>
+          <li class="active">{{ 'ui.staff' | translate }}</li>
+        </ol>
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        
+      	<div class="row" ng-show="!$staff.businessID && !$staff.isLoading">
+      		<div class="col-lg-6">
+      			<div class="box box-default">
+      				<div class="box-header with-border">
+      					<i class="fa fa-bullhorn"></i>
+
+      					<h3 class="box-title">{{ 'ui.notice' | translate }}</h3>
+      				</div>
+      				<!-- /.box-header -->
+      				<div class="box-body">
+  						<div class="callout callout-info" ui-sref="business">
+      						<h4>{{ 'ui.setuprequired' | translate }}</h4>
+      						<p>{{ 'ui.gotobusinesssetup' | translate }}</p>
+  						</div>
+  					</div>
+  					<!-- /.box-body -->
+  				</div>
+  				<!-- /.box -->
+  			</div>
+  		</div>
+
+       	<div class="row" ng-show="$staff.businessID">
+
+			
+			<div class="col-lg-6">
+
+				<div class="box box-solid box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">{{ 'ui.create' | translate }} {{ 'ui.staff' | translate }}</h3>
+						<div class="box-tools pull-right">
+						  <div class="has-feedback">
+					        <!-- 
+					        <select type="text" ng-model="$staff.businessID" class="form-control input-sm" placeholder="Search...">
+								<option value="{{ record._id }}" ng-repeat="record in $staff.businesses">{{ record.name }}</option>
+					        </select> 
+					        -->
+					      </div>
+						  <!-- <button class="btn btn-box-tool"><i class="fa fa-user-o"></i></button> -->
+						</div><!-- /.box-tools -->
+					</div><!-- /.box-header -->
+
+					<form class="form-horizontal" id="registerUser" ng-submit="$staff.createStaff(form)" name="form">
+						<div class="box-body">
+						  
+						  <div class="form-group" ng-class="{ 'has-success': form.name.$valid && $staff.submitted,
+                                            'has-error': form.name.$invalid && $staff.submitted }">
+						    <label class="col-sm-3 control-label">{{ 'ui.name' | translate }}*</label>
+
+						    <div class="col-sm-8">
+						      <input autocomplete="off" required ng-model="$staff.newStaff.name"  name="name" type="text" class="form-control" placeholder="{{ 'ui.name' | translate }}" >
+						      <p class="help-block" ng-show="form.name.$error.required && $staff.submitted">
+					            A name is required
+					          </p>
+						    </div>
+						  </div>
+						  <div class="form-group" ng-class="{ 'has-success': form.email.$valid && $staff.submitted,
+                                            'has-error': form.email.$invalid && $staff.submitted }">
+						    <label  class="col-sm-3 control-label">{{ 'ui.email' | translate }}*</label>
+
+						    <div class="col-sm-8">
+						      <input autocomplete="off" required ng-model="$staff.newStaff.email" name="email" type="email" class="form-control" placeholder="{{ 'ui.email' | translate }}" mongoose-error>
+						      <p class="help-block" ng-show="form.email.$error.email && $staff.submitted">
+					            Doesn't look like a valid email.
+					          </p>
+					          <p class="help-block" ng-show="form.email.$error.required && $staff.submitted">
+					            What's your email address?
+					          </p>
+					          <p class="help-block" ng-show="form.email.$error.mongoose">
+					            {{ $staff.errors.email }}
+					          </p>
+						    </div>
+						  </div>
+
+						  <div class="form-group" ng-class="{ 'has-success': form.password.$valid && $staff.submitted,
+                                            'has-error': form.password.$invalid && $staff.submitted }">
+						    <label  class="col-sm-3 control-label">{{ 'ui.password' | translate }}*</label>
+
+						    <div class="col-sm-8">
+						      <input autocomplete="off" required ng-min="3" ng-model="$staff.newStaff.password" name="password" type="password" class="form-control" placeholder="{{ 'ui.password' | translate }}">
+						    
+						      <p class="help-block"
+					             ng-show="(form.password.$error.minlength || form.password.$error.required) && $staff.submitted">
+					            Password must be at least 3 characters.
+					          </p>
+					          <p class="help-block" ng-show="form.password.$error.mongoose">
+					            {{ $staff.errors.password }}
+					          </p>
+
+						    </div>
+						  </div>
+
+						  <!-- <div class="form-group" ng-class="{ 'has-success': form.confirmPassword.$valid && $staff.submitted,
+                                        						'has-error': form.confirmPassword.$invalid && $staff.submitted }">
+						    <label  class="col-sm-3 control-label">{{ 'ui.retypepassword' | translate }}*</label>
+
+						    <div class="col-sm-8">
+						      <input 
+						      	autocomplete="off" 
+						      	type="password" 
+						      	class="form-control" 
+						      	name="confirmPassword" 
+						      	placeholder="{{ 'ui.retypepassword' | translate }}" 
+						      	ng-model="$staff.newStaff.confirmPassword"
+				                ng-match="$staff.newStaff.password"
+				                ng-minlength="3" 
+				                required
+			                 >
+										    
+						      <p class="help-block"
+					             ng-show="form.confirmPassword.$error.match && $staff.submitted">
+					            Passwords must match.
+					          </p>
+
+						    </div>
+						  </div>
+ 							-->
+
+
+						  <!-- <div class="form-group">
+						    <div class="col-sm-offset-3 col-sm-8">
+						      <div class="checkbox">
+						        <label>
+						          <input ng-model="$staff.newStaff.active" type="checkbox"> {{ 'ui.active' | translate }}
+						        </label>
+						      </div>
+						    </div>
+						  </div> -->
+						</div>
+						<!-- /.box-body -->
+						<div class="box-footer">
+
+						  <button type="button" class="btn btn-default" ng-click="$staff.cancelForm();">{{ 'ui.cancel' | translate }}</button>
+
+						  <button type="submit" class="btn btn-primary pull-right">{{ 'ui.create' | translate }}</button>
+
+						</div>
+						<!-- /.box-footer -->
+					</form>
+					<!-- form-horizontal -->
+
+
+				</div><!-- /.box -->
+				
+
+			</div>
+			<!-- col-lg-6 -->
+        	
+        	<div class="col-lg-6">
+
+        		<div class="box box-primary">
+        			<div class="box-header">
+        			<h3 class="box-title">{{ 'ui.manageuser' | translate }}</h3>
+
+        				<div class="box-tools">
+        					<div class="input-group input-group-sm" style="width: 150px;">
+        						<input type="text" name="table_search" class="form-control pull-right" placeholder="Search" ng-model="$staff.userFilter">
+
+        						<div class="input-group-btn">
+        							<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+        						</div>
+        					</div>
+        				</div>
+        			</div>
+        			<!-- /.box-header -->
+        			<div class="box-body table-responsive">
+        				<table class="table table-hover">
+        					<thead>
+        						<tr>
+	        						<th>✔︎</th>
+	        						<th>{{ 'ui.name' | translate }}</th>
+	        						<th>{{ 'ui.email' | translate }}</th>
+	        						<th>{{ 'ui.role' | translate }}</th>
+	        						<th>{{ 'ui.password' | translate }}</th>
+	        						<th>{{ 'ui.update' | translate }}</th>
+	        						<th>{{ 'ui.delete' | translate }}</th>
+	        					</tr>
+        					</thead>
+        					<tbody>
+	        					<tr ng-repeat="user in $staff.staff | filter:$staff.userFilter">
+	        						<td><input type="checkbox" ng-model="user.active" ng-change="$staff.updateInfo(user)"></td>
+	        						<td><input type="text" ng-model="user.name" ng-change="$staff.updateInfo(user)"></td>
+	        						<td><input type="text" ng-model="user.email" ng-change="$staff.updateInfo(user)"></td>
+	        						<td>
+	        							<select ng-model="user.role" ng-change="$staff.changeRole(user)">
+        									<option value="user">{{  'ui.user' | translate }}</option>
+	        								<option value="staff">{{ 'ui.staff' | translate }}</option>
+	        								<option value="manager">{{ 'ui.manager' | translate }}</option>
+	        							</select>
+	        						</td>
+	        						<td><input autocomplete="off" type="password" ng-model="user.newPassword"></td>
+	        						<td><button ng-click="$staff.forceResetPassword(user)" class="btn btn-warning">{{ 'ui.update' | translate }} {{ 'ui.password' | translate }}</button></td>
+	        						<td><button ng-click="$staff.deleteStaff(user)" class="btn btn-danger">{{ 'ui.delete' | translate }} {{ 'ui.user' | translate }}</button></td>
+	        					</tr>
+        					</tbody>
+        				</table>
+        			</div>
+        			<!-- /.box-body -->
+        		</div>
+
+
+        	</div>
+
+        </div>
+        <!-- row -->
+		<!-- 
+		<pre>{{ $staff.staff | json }}</pre>
+		<pre>{{ $staff.businesses | json }}</pre> -->
+		
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer></footer>
+    
+
+
+  </div>
+  <!-- ./wrapper -->
+
+
+</div>
+<!-- fakebody -->

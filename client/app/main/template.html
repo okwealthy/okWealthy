@@ -1,0 +1,99 @@
+<div class="ng-cloak fake-body d-hold-transition hold-header-transition skin-blue sidebar-mini fixed" sidebar-open d-ng-class="{ 'sidebar-open': $ctrl.UI.sidebar.open }" >
+  <div class="wrapper">
+
+    <navbar></navbar>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          {{ 'ui.product' | translate }} {{ 'ui.category' | translate }}
+          <small>{{ 'ui.manageproductcategory' | translate }}</small>
+        </h1>
+        <ol class="breadcrumb">
+          <li><i class="fa fa-cog fa-spin"></i> {{ 'ui.platform' | translate }}</li>
+          <li>{{ 'ui.manager' | translate }}</li>
+          <li class="active">{{ 'ui.category' | translate }}</li>
+        </ol>
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <!-- Your Page Content Here -->
+        
+        <div class="row">
+          
+
+          <div class="col-lg-6" ng-if="!$ctrl.businessID">
+              
+              <div class="box box-default">
+                  <div class="box-header with-border">
+                    <i class="fa fa-bullhorn"></i>
+
+                    <h3 class="box-title">{{ 'ui.notice' | translate }}</h3>
+                  </div>
+                  <!-- /.box-header -->
+                  <div class="box-body">
+                    <div class="callout callout-info" ui-sref="business" >
+                        <h4>{{ 'ui.setuprequired' | translate }}</h4>
+                        <p>{{ 'ui.gotobusinesssetup' | translate }}</p>
+                    </div>
+                  </div>
+                  <!-- /.box-body -->
+              </div>
+              <!-- /.box -->
+
+          </div>  
+
+          <div class="col-lg-6">
+            
+            <div class="box box-success">
+              <div class="box-header with-border">
+                <h3 class="box-title">{{ 'ui.category' | translate }}</h3>
+              </div>
+              <div class="box-body">
+                
+              </div>
+              <!-- /.box-body -->
+            </div>
+        <!-- box -->
+
+          </div>
+          <!-- lg6 -->
+
+          <div class="col-lg-6">
+            
+            <div class="box box-success">
+              <div class="box-header with-border">
+                <h3 class="box-title">{{ 'ui.category' | translate }}</h3>
+              </div>
+              <div class="box-body">
+                
+              </div>
+              <!-- /.box-body -->
+            </div>
+        <!-- box -->
+
+          </div>
+          <!-- lg6 -->
+
+        </div>
+        <!-- row -->
+
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer></footer>
+    
+
+
+  </div>
+  <!-- ./wrapper -->
+
+
+</div>
+<!-- fakebody -->

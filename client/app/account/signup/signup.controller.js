@@ -2,6 +2,7 @@
 
 import angular from 'angular';
 
+
 export default class SignupController {
   user = {
     name: '',
@@ -12,11 +13,21 @@ export default class SignupController {
   submitted = false;
 
 
-  /*@ngInject*/
-  constructor(Auth, $state) {
+  constructor(Auth, $state, Trans, $window) {
+    'ngInject';
+
+    this.$window = $window;
+    this.Trans = Trans;
+
     this.Auth = Auth;
     this.$state = $state;
   }
+
+
+  oAuth(provider){
+    this.$window.location.href = `/auth/${provider}`;
+  }
+
 
   register(form) {
     this.submitted = true;
@@ -42,4 +53,7 @@ export default class SignupController {
         });
     }
   }
+
+
+
 }

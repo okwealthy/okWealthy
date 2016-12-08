@@ -59,7 +59,9 @@
 .skin-blue .main-header li.user-header {
   background-color: #3c8dbc;
   
-  background: url('/assets/images/lte-admin-img/boxed-bg.jpg');
+  // background: url('/assets/images/lte-admin-img/boxed-bg.jpg');
+  
+  background: linear-gradient(45deg, rgba(206,43,43,0.2) 0%, rgba(24,176,222,0.2) 100%);
 
 }
 .skin-blue .content-header {
@@ -159,4 +161,10 @@ input:-webkit-autofill {
 }
 .skin-blue.layout-top-nav .main-header > .logo:hover {
   background-color: #3b8ab8;
+}
+
+
+
+.skin-blue .wrapper{
+  background: white;
 }

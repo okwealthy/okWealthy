@@ -1,5 +1,6 @@
 'use strict';
 
+
 export default class LoginController {
   user = {
     name: '',
@@ -12,10 +13,21 @@ export default class LoginController {
   submitted = false;
 
 
-  /*@ngInject*/
-  constructor(Auth, $state) {
+  constructor(Auth, $state, Trans, $window) {
+    'ngInject';
+
+   
+
+    this.$window = $window;
+
     this.Auth = Auth;
     this.$state = $state;
+    this.Trans = Trans;
+  }
+
+
+  oAuth(provider){
+    this.$window.location.href = `/auth/${provider}`;
   }
 
   login(form) {

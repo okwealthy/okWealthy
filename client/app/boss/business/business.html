@@ -1,0 +1,182 @@
+<div class="ng-cloak fake-body d-hold-transition hold-header-transition skin-blue sidebar-mini fixed" sidebar-open d-ng-class="{ 'sidebar-open': $ctrl.UI.sidebar.open }" >
+  <div class="wrapper">
+
+    <navbar></navbar>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          {{ 'ui.business' | translate }}
+          <small>{{ 'ui.setupyourbusiness' | translate }}</small>
+        </h1>
+        <ol class="breadcrumb">
+          <li><i class="fa fa-cog fa-spin"></i> {{ 'ui.platform' | translate }}</li>
+          <li>{{ 'ui.boss' | translate }}</li>
+          <li class="active"><i class="fa fa-usd"></i> {{ 'ui.business' | translate }}</li>
+        </ol>
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        
+        <div class="row">
+          
+          <div class="col-lg-6" ng-hide="$business.businesses.length > 0">
+            
+            <div class="box box-solid box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">{{ 'ui.createbusiness' | translate }}</h3>
+                <div class="box-tools pull-right">
+                  <!-- <button class="btn btn-box-tool"><i class="fa fa-user-o"></i></button> -->
+                </div><!-- /.box-tools -->
+              </div><!-- /.box-header -->
+              
+              <form class="form-horizontal" ng-submit="$business.createBusiness()">
+                <div class="box-body">
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">{{ 'ui.name' | translate }}</label>
+
+                    <div class="col-sm-8">
+                      <input ng-model="$business.newBusiness.name" type="text" class="form-control" placeholder="{{ 'ui.name' | translate }}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-3 control-label">{{ 'ui.info' | translate }}</label>
+
+                    <div class="col-sm-8">
+                      <textarea  ng-model="$business.newBusiness.info" class="form-control"></textarea>
+                    </div>
+                  </div>
+
+                  <!-- <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-8">
+                      <div class="checkbox">
+                        <label>
+                          <input ng-model="$business.newBusiness.active" type="checkbox"> {{ 'ui.active' | translate }}
+                        </label>
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+
+                  <button type="button" class="btn btn-default" ng-click="$business.resetForm()">{{ 'ui.cancel' | translate }}</button>
+                  
+                  <button type="submit" class="btn btn-primary pull-right">{{ 'ui.create' | translate }}</button>
+
+                </div>
+                <!-- /.box-footer -->
+              </form>
+              <!-- form-horizontal -->
+
+
+            </div><!-- /.box -->
+          </div>
+
+          <div class="col-lg-6">
+            <div class="box box-solid d-box-info" ng-class="{ 'box-info': $business.filterActive, 'box-default': !$business.filterActive }">
+              <div class="box-header with-border">
+                <h3 class="box-title">{{ 'ui.businessdetail' | translate }} <span ng-if="!$business.filterActive">( {{ 'ui.trashed' | translate }} )</span> </h3>
+                <div class="box-tools pull-right">
+                  <!-- <button ng-if="$business.filterActive" class="btn btn-box-tool" ng-click="$business.filterActive = false;"><i class="fa fa-trash-o"></i></button> -->
+                  <!-- <button ng-if="!$business.filterActive" class="btn btn-box-tool" ng-click="$business.filterActive = true;"><i class="fa fa-refresh"></i></button> -->
+                </div><!-- /.box-tools -->
+              </div><!-- /.box-header -->
+              <div class="box-body">
+                
+                <table class="table table-bordered">
+                  <tbody>
+                    <tr>
+                      <th>{{ 'ui.name' | translate }}</th>
+                      <th>{{ 'ui.info' | translate }}</th>
+                      <th>{{ 'ui.edit' | translate }}</th>
+                      <!-- <th ng-if="$business.filterActive">{{ 'ui.trash' | translate }}</th> -->
+                      <!-- <th ng-if="!$business.filterActive">{{ 'ui.restore' | translate }}</th> -->
+                    </tr>
+                    <tr ng-repeat="(key, record) in $business.businesses | filter:{ active: $business.filterActive }" >
+                      <td>{{ record.name }}</td>
+                      <td style="white-space: pre;">{{ record.info }}</td>
+                      <td><button class="btn btn-default" ng-click="$business.selectBusiness(record)">{{ 'ui.edit' | translate }}</button></td>
+                      <!-- <td ng-if="$business.filterActive"><button class="btn btn-danger" ng-click="$business.trashBusiness(record)">{{ 'ui.trash' | translate }}</button></td> -->
+                      <!-- <td ng-if="!$business.filterActive"><button class="btn btn-success" ng-click="$business.restoreBusiness(record)">{{ 'ui.restore' | translate }}</button></td> -->
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div><!-- /.box-body -->
+            </div><!-- /.box -->
+          </div>
+
+          <div class="col-lg-6" ng-if="$business.selectedBusiness">
+            <div class="box box-solid box-default">
+              <div class="box-header with-border">
+                <h3 class="box-title">{{ 'ui.updateinfo' | translate }}</h3>
+                <div class="box-tools pull-right">
+                  <!-- <button class="btn btn-box-tool"><i class="fa fa-user-o"></i></button> -->
+                </div><!-- /.box-tools -->
+              </div><!-- /.box-header -->
+              
+              <form class="form-horizontal" ng-submit="$business.updateSelectedBusiness($business.selectedBusiness)">
+                <div class="box-body">
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">{{ 'ui.name' | translate }}</label>
+
+                    <div class="col-sm-8">
+                      <input ng-model="$business.selectedBusiness.name" type="text" class="form-control" placeholder="{{ 'ui.name' | translate }}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-3 control-label">{{ 'ui.info' | translate }}</label>
+
+                    <div class="col-sm-8">
+                      <textarea  ng-model="$business.selectedBusiness.info" class="form-control"></textarea>
+                    </div>
+                  </div>
+
+                  <!-- <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-8">
+                      <div class="checkbox">
+                        <label>
+                          <input ng-model="$business.newBusiness.active" type="checkbox"> {{ 'ui.active' | translate }}
+                        </label>
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+
+                  <button type="submit" class="btn btn-primary pull-right">{{ 'ui.update' | translate }}</button>
+
+                </div>
+                <!-- /.box-footer -->
+              </form>
+              <!-- form-horizontal -->
+
+            </div><!-- /.box -->
+          </div>
+
+        </div>
+        
+
+
+
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer></footer>
+    
+
+
+  </div>
+  <!-- ./wrapper -->
+
+
+</div>
+<!-- fakebody -->

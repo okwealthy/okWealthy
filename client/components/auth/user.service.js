@@ -6,6 +6,21 @@ export function UserResource($resource) {
   return $resource('/api/users/:id/:controller', {
     id: '@_id'
   }, {
+    
+    forceResetPassword: {
+      url: '/api/users/:id/forceResetPassword',
+      method: 'PUT',
+    },
+
+    controlUpdate:{
+      method: 'PUT',
+    },
+    
+    controlCreate:{
+      url: '/api/users/panel',
+      method: 'POST',
+    },
+
     changePassword: {
       method: 'PUT',
       params: {
