@@ -70,6 +70,22 @@ export function index(req, res) {
     .catch(handleError(res));
 }
 
+
+export function listFromBusinessCategory(req, res){
+  var q = {
+    _category: req.params.cid,
+    _business: req.params.bid
+  };
+
+  if (req.params.cid === 'all'){
+    delete q._category;
+  }
+
+  return Product.find(q).exec()
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
 // Gets a single Product from the DB
 export function show(req, res) {
   return Product.findById(req.params.id).exec()

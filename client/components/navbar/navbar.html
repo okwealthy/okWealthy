@@ -365,9 +365,42 @@
             <a ui-sref="staff"><i class="fa fa-user-o"></i> {{ 'ui.staff' | translate }}</a>
           </li>
 
-          <li ui-sref-active="active">
-            <a ui-sref="category"><i class="fa fa-sitemap"></i> {{ 'ui.product' | translate }} {{ 'ui.category' | translate }}</a>
+          <li d-ui-sref-active="active" ng-class="{ 'active' : $ctrl.checkActive('category.product') }">
+            <a ui-sref="category"><i class="fa fa-sitemap"></i> {{ 'ui.product' | translate }} {{ 'ui.category' | translate }} 
+              <span class="pull-right-container" ng-if="$ctrl.UI.category.data.length > 0">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            
+
+            <ul class="treeview-menu">
+              
+              <li ng-if="$ctrl.UI.category.data.length > 0" d-ui-sref-active="active" ng-class="{ 'active' : $ctrl.checkActive('category.product', 'all', 'categoryID') }">
+                <a ui-sref="product({ categoryID: 'all' })" >
+                  <i class="fa fa-shopping-cart"></i>
+                  {{ 'ui.all' | translate }}  {{ 'ui.product' | translate }}
+                  <!-- <span class="pull-right-container">
+                    <span class="label label-primary pull-right">*</span>
+                  </span> -->
+                </a>
+              </li>
+              <li d-ui-sref-active="active" ng-class="{ 'active' : $ctrl.checkActive('category.product', category._id, 'categoryID') }" ng-repeat="category in $ctrl.UI.category.data" ng-if="category.active">
+                <a ui-sref="product({ categoryID: category._id })" >
+                   <i class="fa fa-shopping-cart"></i>
+                 
+                  {{ category.name }}
+                  <!-- <span class="pull-right-container">
+                    <span class="label label-primary pull-right">*</span>
+                  </span> -->
+                </a>
+              </li>
+
+            </ul>
+
           </li>
+
+
+
 
         </ul>
         <!-- Level 1 -->

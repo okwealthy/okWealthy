@@ -3,46 +3,52 @@ const angular = require('angular');
 
 const uiRouter = require('angular-ui-router');
 
-import routes from './category.routes';
+import routes from './product.routes';
 
-export class CategoryComponent {
-  
-  constructor(Category, Auth, UI) {
+export class ProductComponent {
+  constructor(Product, Auth, UI, $stateParams) {
     'ngInject';
 
-    this.Category = Category;
+    this.$stateParams = $stateParams;
+
+    this.Product = Product;
     this.Auth = Auth;
     this.UI = UI;
 
-
   }
   initForm(){
-    this.newCategory = {
+    this.newProduct = {
+      name: '',
+      info: '',
       _business: this.businessID,
-      name: ''
+      _category: this.$stateParams.categoryID,
+      _remixers: [],
+      _modifiers: [],
+      _with: []
     };
+
   }
 
-  createCategory(){
-    return this.Category.http
-    .create(this.newCategory)
+  createProduct(){
+    return this.Product.http
+    .create(this.newProduct)
     .then(() => {
       this.initForm();
       this.loadData();
     })
   }
 
-  loadCategory(){
-    return this.Category.http.list({
-      _business: this.businessID
+  loadProduct(){
+    return this.Product.http.list({
+      _business: this.businessID,
+      _category: this.$stateParams.categoryID
     })
     .then((data) => {
-      this.categories = data;
-      this.UI.category.refresh(data);
+      this.products = data;
     });
   }
 
-  removeCategory(data){
+  removeProduct(data){
 
     if (data.active){
       window.alert('請先停用，讓後再刪除。\n Please disable before delete.');
@@ -53,9 +59,9 @@ export class CategoryComponent {
       return;
     }
 
-    return this.Category.http.remove(data)
+    return this.Product.http.remove(data)
       .then(() => {
-        this.loadCategory();
+        this.loadProduct();
       });
   }
 
@@ -76,10 +82,10 @@ export class CategoryComponent {
     this.cacheTimeout = setTimeout(() => {
       if (newStr !== this.cacheInfo){
         this.cacheInfo = newStr;
-        this.Category.http.update(newData)
+        this.Product.http.update(newData)
           .then((updatedData) => {
 
-            // this.loadCategory();
+            // this.loadProduct();
 
           });
       }
@@ -92,14 +98,14 @@ export class CategoryComponent {
     this.Auth.getCurrentUser()
       .then(() => {
 
-        this.isLoading = false;
         this.businessID = this.Auth.getCurrentUserSync()._business;
+        this.isLoading = false;
         
         if (!this.businessID){
           return;
         }
 
-        this.loadCategory();
+        this.loadProduct();
         this.initForm();
 
       });
@@ -109,16 +115,13 @@ export class CategoryComponent {
   $onInit(){
     this.loadData();
   }
-
-
-
 }
 
-export default angular.module('owApp.category', [uiRouter])
+export default angular.module('owApp.product', [uiRouter])
   .config(routes)
-  .component('category', {
-    template: require('./category.html'),
-    controller: CategoryComponent,
+  .component('product', {
+    template: require('./product.html'),
+    controller: ProductComponent,
     controllerAs: '$ctrl'
   })
   .name;

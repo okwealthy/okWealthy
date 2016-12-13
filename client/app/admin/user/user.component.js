@@ -26,7 +26,7 @@ export class UserComponent {
     this.Auth = Auth;
 
     this.passwordTemplate = `
-      <div class="ui-grid-cell-contents">
+      <div class="ui-grid-cell-contents" ng-if="row.entity.provider === 'local'">
         <input style="width: 50px;" autocomplete="off" type="password" ng-model="row.entity.newPassword">
         <button ng-click="grid.appScope.forceResetPassword(row.entity)" class="btn btn-warning btn-xs">{{ 'ui.update' | translate }} {{ 'ui.password' | translate }}</button>
       </div>

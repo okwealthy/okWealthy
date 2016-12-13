@@ -12,7 +12,7 @@ import uiBootstrap from 'angular-ui-bootstrap';
 // import ngMessages from 'angular-messages';
 // import ngValidationMatch from 'angular-validation-match';
 
-
+import uiSelect from 'ui-select';
 import uiGrid from 'angular-ui-grid';
 
 import {
@@ -34,9 +34,11 @@ import business from './boss/business/business.component';
 
 import staff from './manager/staff/staff.component';
 import category from './manager/category/category.component';
+import product from './manager/product/product.component';
 
 
 import transport from './service/transport.service';
+import ui from './service/ui.service';
 
 
 
@@ -50,18 +52,22 @@ import './app.scss';
 
 angular.module('owApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
     
+    'ui.select',
+
     'ui.grid',
     'ui.grid.edit',
     'ui.grid.rowEdit', 
     'ui.grid.cellNav',
 
     transport,
+    ui,
+
 
     business,
     staff,
     user,
     category,
-
+    product,
 
     translate,  
 

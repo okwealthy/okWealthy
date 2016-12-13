@@ -3,6 +3,27 @@ const angular = require('angular');
 
 export default angular.module('owApp.transport', [])
 
+.service('Product', function($http){
+	'ngInject';
+
+	this.util = {};
+
+	this.http = {};
+	this.http.list = function(data){
+		return $http({
+			url: `/api/products/business/${data._business}/category/${data._category}`,
+			method: 'GET',
+			// data: data
+		})
+		.then((response) => {
+			return response.data;
+		});
+	};
+
+
+
+})
+
 .service('Category', function($http, $q){
 	'ngInject';
 
@@ -31,6 +52,30 @@ export default angular.module('owApp.transport', [])
 			return response.data;
 		});
 	};
+
+	this.http.update = function(data){
+		return $http({
+			url: `/api/categories/${data._id}`,
+			method: 'PUT',
+			data: data
+		})
+		.then((response) => {
+			return response.data;
+		});
+	};
+
+	this.http.remove = function(data){
+		return $http({
+			url: `/api/categories/${data._id}`,
+			method: 'DELETE',
+			data: data
+		})
+		.then((response) => {
+			return response.data;
+		});
+	};
+
+
 
 })
 

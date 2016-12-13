@@ -291,6 +291,21 @@ dict['ui.manageproductcategory'] = {
 	hk: '管理商品類別'
 };
 
+dict['ui.all'] = {
+	en: 'All',
+	hk: '全部'
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
 dict['ui.'] = {
 	en: '',
 	hk: ''
@@ -310,6 +325,212 @@ dict['ui.'] = {
 	en: '',
 	hk: ''
 };
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
+dict['ui.'] = {
+	en: '',
+	hk: ''
+};
+
 
 
 

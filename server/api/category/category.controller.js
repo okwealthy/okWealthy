@@ -70,6 +70,14 @@ export function index(req, res) {
     .catch(handleError(res));
 }
 
+export function listFromBusiness(req, res){
+  return Category.find({
+    _business: req.params.bid
+  }).exec()
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
 // Gets a single Category from the DB
 export function show(req, res) {
   return Category.findById(req.params.id).exec()

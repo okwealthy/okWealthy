@@ -21,7 +21,7 @@ export class NavbarComponent {
   };
   submitted = false;
 
-  constructor(Auth, $state, UI, Trans) {
+  constructor(Auth, $state, UI, Trans, $stateParams) {
     'ngInject';
 
     this.$state = $state;
@@ -34,8 +34,11 @@ export class NavbarComponent {
     this.isAdmin = Auth.isAdminSync;
     this.getCurrentUser = Auth.getCurrentUserSync;
 
-    this.loadData();
+    this.$stateParams = $stateParams;
+  }
 
+  $onInit(){
+    this.loadData();
   }
 
   loadData(){
@@ -48,11 +51,29 @@ export class NavbarComponent {
         this.isStaff = this.Auth.hasRoleSync('staff');
         this.isUser = this.Auth.hasRoleSync('user');
         
+        this.UI.category.provide();
 
       });
   }
 
+  checkActive(matchString, cID, paramter){
 
+    if (cID){
+      if (matchString.indexOf(this.$state.current.name) > -1 && cID === this.$stateParams[paramter]){
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      if (matchString.indexOf(this.$state.current.name) > -1){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    
+  }
 
   login(form) {
     this.submitted = true;

@@ -8,13 +8,13 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
-          {{ 'ui.product' | translate }} {{ 'ui.category' | translate }}
-          <small>{{ 'ui.manageproductcategory' | translate }}</small>
+          {{ 'ui.product' | translate }} {{ 'ui.product' | translate }}
+          <small>{{ 'ui.manageproduct' | translate }}</small>
         </h1>
         <ol class="breadcrumb">
           <li><i class="fa fa-cog fa-spin"></i> {{ 'ui.platform' | translate }}</li>
           <li>{{ 'ui.manager' | translate }}</li>
-          <li class="active">{{ 'ui.category' | translate }}</li>
+          <li class="active">{{ 'ui.product' | translate }}</li>
         </ol>
       </section>
 
@@ -23,8 +23,9 @@
         <!-- Your Page Content Here -->
         
         <div class="row">
+          
 
-          <div class="col-lg-6" ng-if="!$ctrl.businessID && !$ctrl.isLoading">
+          <div class="col-lg-6" ng-if="!$ctrl.businessID">
               
               <div class="box box-default">
                   <div class="box-header with-border">
@@ -45,16 +46,13 @@
 
           </div>  
 
-
-
-        	<div class="col-lg-6">
-		        
-		        <div class="box box-success">
-		          <div class="box-header with-border">
-		            <h3 class="box-title">{{ 'ui.create' | translate }} {{ 'ui.category' | translate }}</h3>
-		          </div>
-		          
-              <form class="form-horizontal" ng-submit="$ctrl.createCategory()">
+          <div class="col-lg-6" ng-hide="$ctrl.$stateParams.categoryID === 'all'">
+            
+            <div class="box box-success">
+              <div class="box-header with-border">
+                <h3 class="box-title">{{ 'ui.create' | translate }} {{ 'ui.product' | translate }}</h3>
+              </div>
+              <form class="form-horizontal" ng-submit="$ctrl.createProduct()">
                 <div class="box-body">
                   <div class="form-group">
                     <label  class="col-sm-3 control-label">{{ 'ui.name' | translate }}</label>
@@ -63,15 +61,15 @@
                       <input class="form-control" ng-model="$ctrl.newCategory.name" placeholder="{{ 'ui.name' | translate }}">
                     </div>
                   </div>
-                  <!-- <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox"> Remember me
-                        </label>
-                      </div>
+
+                  <div class="form-group">
+                    <label  class="col-sm-3 control-label">{{ 'ui.name' | translate }}</label>
+
+                    <div class="col-sm-8">
+                      <input class="form-control" ng-model="$ctrl.newCategory.name" placeholder="{{ 'ui.name' | translate }}">
                     </div>
-                  </div> -->
+                  </div>
+                  
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
@@ -81,39 +79,27 @@
                 <!-- /.box-footer -->
               </form>
 
-		        </div>
-				    <!-- box -->
+            </div>
+        <!-- box -->
 
-        	</div>
-        	<!-- lg6 -->
+          </div>
+          <!-- lg6 -->
 
-			    <div class="col-lg-6">
-		        
-		        <div class="box box-info">
-		          <div class="box-header with-border">
-		            <h3 class="box-title">{{ 'ui.edit' | translate }} {{ 'ui.category' | translate }}</h3>
-		          </div>
-		          <div class="box-body table-responsive no-padding">
-                <table class="table table-hover">
-                  <tr>
-                    <th>{{ 'ui.active' | translate }}</th>
-                    <th>{{ 'ui.name' | translate }}</th>
-                    <th>{{ 'ui.delete' | translate }}</th>
-                  </tr>
-                  <tr ng-repeat="category in $ctrl.categories">
-                    <td><input type="checkbox" ng-model="category.active" ng-change="$ctrl.updateInfo(category)"></td>
-                    <td><input type="text" ng-model="category.name" ng-change="$ctrl.updateInfo(category)"></td>
-                    <td><button ng-click="$ctrl.removeCategory(category)" class="btn btn-sm btn-danger">{{ 'ui.delete' | translate }}</button></td>
-                  </tr>
-
-                </table>
+          <div class="col-lg-6">
+            
+            <div class="box box-success">
+              <div class="box-header with-border">
+                <h3 class="box-title">{{ 'ui.edit' | translate }} {{ 'ui.product' | translate }}</h3>
+              </div>
+              <div class="box-body">
+                
               </div>
               <!-- /.box-body -->
-		        </div>
-				<!-- box -->
+            </div>
+        <!-- box -->
 
-        	</div>
-        	<!-- lg6 -->
+          </div>
+          <!-- lg6 -->
 
         </div>
         <!-- row -->

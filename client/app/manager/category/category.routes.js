@@ -7,5 +7,8 @@ export default function($stateProvider) {
       url: '/manager/category',
       template: '<category></category>',
       authenticate: 'manager'
-    });
+    })
+    
+
+    ;
 }

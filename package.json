@@ -1,5 +1,6 @@
 {
   "name": "ow",
+  "description": "npm install angular-ui-grid admin-lte ngstorage ui-select nprogress --save",
   "version": "0.0.0",
   "main": "server/index.js",
   "dependencies": {
